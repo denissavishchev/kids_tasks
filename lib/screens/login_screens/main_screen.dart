@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/login_provider.dart';
 import '../parent_screens/main_parent_screen.dart';
-import 'login_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -37,7 +35,10 @@ class _MainScreenState extends State<MainScreen> {
                     onPressed: () => data.logOut(context),
                     child: const Text('kid'),),);
                 }else{
-                  return const Center(child: CircularProgressIndicator(),);
+                  return SizedBox(
+                    height: MediaQuery.sizeOf(context).height,
+                      width: MediaQuery.sizeOf(context).width,
+                      child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,));
                 }
               },
             );

@@ -12,14 +12,6 @@ void main() async{
   await Hive.initFlutter();
   await Hive.openBox('data');
   await Firebase.initializeApp(
-      // options: const FirebaseOptions(
-      //     apiKey: '',
-      //     appId: '1:442746995740:android:08e5d1b9a5191e5fdf0bd9',
-      //     messagingSenderId: 'sendid',
-      //     projectId: 'kidstasks-dddee',
-      //     storageBucket: 'kidstasks-dddee.appspot.com',
-      //     authDomain: 'kidstasks-dddee.firebaseapp.com'
-      // )
   );
   runApp(MultiProvider(
     providers: [
