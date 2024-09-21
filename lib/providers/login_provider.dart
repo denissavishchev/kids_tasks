@@ -90,7 +90,7 @@ class LoginProvider with ChangeNotifier {
       successSighUp(context);
     }catch(e){
       if(e.toString().contains('Password should be at least 6 characters')){
-        print('weakPassword1');
+        print('weakPassword');
       }else if(e.toString().contains('The email address is already in use by another account')){
         print('alreadyTaken');
       }
