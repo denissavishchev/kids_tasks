@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kids_tasks/providers/login_provider.dart';
 import 'package:provider/provider.dart';
 import '../../providers/parent_provider.dart';
 import 'basic_container_widget.dart';
@@ -26,7 +27,8 @@ class ParentListTilesWidget extends StatelessWidget {
                     return ListView.builder(
                         itemCount: snapshot.data?.docs.length,
                         itemBuilder: (context, index){
-                          if(snapshot.data?.docs[index].get('parentEmail').toLowerCase() == 'data.email'){
+                          if(snapshot.data?.docs[index].get('parentEmail').toLowerCase()
+                              == data.box.get('email')){
                             return GestureDetector(
                               onTap: () {
                                 // data.priceController.text = snapshot.data?.docs[index].get('price');

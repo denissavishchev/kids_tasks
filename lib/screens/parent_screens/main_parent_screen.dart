@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kids_tasks/providers/login_provider.dart';
 import 'package:kids_tasks/widgets/parents_widgets/parent_list_tiles_widget.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants.dart';
 import '../../providers/parent_provider.dart';
 import 'add_task_screen.dart';
@@ -17,8 +17,8 @@ class MainParentScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       backgroundColor: kGrey,
       body: SafeArea(
-          child: Consumer<ParentProvider>(
-            builder: (context, data, _){
+          child: Consumer2<ParentProvider, LoginProvider>(
+            builder: (context, data, loginData, _){
               return SingleChildScrollView(
                 child: Stack(
                   children: [
@@ -39,7 +39,6 @@ class MainParentScreen extends StatelessWidget {
                               //       color: kBlue,
                               //       size: 32,
                               //     )),
-                              const Spacer(),
                               // IconButton(
                               //     onPressed: () => Navigator.pushReplacement(context,
                               //         MaterialPageRoute(builder: (context) =>
@@ -49,6 +48,10 @@ class MainParentScreen extends StatelessWidget {
                               //       color: kBlue,
                               //       size: 32,
                               //     )),
+                              TextButton(
+                                  onPressed: () => loginData.logOut(context),
+                                  child: Text('LogOut',style: kTextStyle,)),
+                              const Spacer(),
                               IconButton(
                                   onPressed: () {
                                     data.isEdit = false;

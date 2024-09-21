@@ -1,28 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants.dart';
 import '../../providers/parent_provider.dart';
 import '../../widgets/button_widget.dart';
 import 'main_parent_screen.dart';
 
-class AddTaskScreen extends StatefulWidget {
+class AddTaskScreen extends StatelessWidget {
   const AddTaskScreen({super.key});
-
-  @override
-  State<AddTaskScreen> createState() => _AddTaskScreenState();
-}
-
-class _AddTaskScreenState extends State<AddTaskScreen> {
-
-  @override
-  void initState() {
-    final data = Provider.of<ParentProvider>(context, listen: false);
-    // data.getKidsData();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +47,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             children: [
                               const SizedBox(height: 18,),
                               TextFormField(
-                                // controller: data.addTaskNameController,
+                                controller: data.addTaskNameController,
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 cursorColor: kDarkGrey,
                                 decoration: textFieldDecoration.copyWith(
@@ -77,7 +62,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               ),
                               const SizedBox(height: 18,),
                               TextFormField(
-                                // controller: data.addTaskDescriptionController,
+                                controller: data.addTaskDescriptionController,
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 keyboardType: TextInputType.multiline,
                                 minLines: 1,
@@ -93,7 +78,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 children: [
                                   Expanded(
                                     child: TextFormField(
-                                      // controller: data.addTaskPriceController,
+                                      controller: data.addTaskPriceController,
                                       autovalidateMode: AutovalidateMode.onUserInteraction,
                                       keyboardType: TextInputType.multiline,
                                       cursorColor: kDarkGrey,
@@ -128,7 +113,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         ),
                         const SizedBox(height: 18,),
                         GestureDetector(
-                          // onTap: () => data.isEdit ? null : data.pickAnImage(),
+                          onTap: () => data.isEdit ? null : data.pickAnImage(),
                           child: Container(
                             width: 100,
                             clipBehavior: Clip.hardEdge,
@@ -136,12 +121,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               color: kBlue.withOpacity(0.3),
                               borderRadius: const BorderRadius.all(Radius.circular(4)),
                             ),
-                            // child: data.image(),
+                            child: data.image(),
                           ),
                         ),
                         const SizedBox(height: 30,),
                         ButtonWidget(
-                          onTap: (){},
+                          onTap: () => data.addTaskToBase(context),
                           // onTap: () => data.isEdit
                           //         ? data.editTaskInBase(context, data.editDocId)
                           //         : data.addTaskToBase(context),
@@ -183,13 +168,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     ),
                   ),
                 ),
-                // data.isLoading
-                //     ? Container(
-                //   width: size.width,
-                //   height: size.height,
-                //   color: kGrey.withOpacity(0.5),
-                //   child: const Center(child: CircularProgressIndicator(color: kBlue,),),
-                // ) : const SizedBox.shrink()
+                data.isLoading
+                    ? Container(
+                  width: size.width,
+                  height: size.height,
+                  color: kGrey.withOpacity(0.5),
+                  child: const Center(child: CircularProgressIndicator(color: kBlue,),),
+                ) : const SizedBox.shrink()
               ],
             );
           },

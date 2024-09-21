@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants.dart';
 import '../../providers/parent_provider.dart';
 import '../stars_widget.dart';
@@ -134,7 +133,7 @@ class BasicContainerWidget extends StatelessWidget {
                             return StatusWidget(
                               snapshot: snapshot,
                               index: index,
-                              name: 'data.status[i]',);
+                              name: data.status[i],);
                           }),
                         ),
                       ),
