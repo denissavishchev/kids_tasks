@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kids_tasks/screens/kid_screens/main_kid_screen.dart';
 import 'package:provider/provider.dart';
 import '../../providers/login_provider.dart';
 import '../parent_screens/main_parent_screen.dart';
@@ -31,9 +32,7 @@ class _MainScreenState extends State<MainScreen> {
                 if(data.role == 'parent'){
                   return const MainParentScreen();
                 }else if(data.role == 'child'){
-                  return Center(child: TextButton(
-                    onPressed: () => data.logOut(context),
-                    child: const Text('kid'),),);
+                  return const MainKidScreen();
                 }else{
                   return SizedBox(
                     height: MediaQuery.sizeOf(context).height,

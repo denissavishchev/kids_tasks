@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
-class StatusWidget extends StatelessWidget {
-  const StatusWidget({
+class KidStatusWidget extends StatelessWidget {
+  const KidStatusWidget({
     super.key,
     required this.snapshot,
     required this.index,
@@ -23,20 +23,20 @@ class StatusWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(4)),
-        border: border ? Border.all(
-          width: 0.5,
-          color: snapshot.data?.docs[index].get('status') == name
-            ? kBlue : Colors.transparent,) : null
+          borderRadius: const BorderRadius.all(Radius.circular(4)),
+          border: border ? Border.all(
+            width: 0.5,
+            color: snapshot.data?.docs[index].get('status') == name
+                ? kWhite : Colors.transparent,) : null
       ),
       child: Text(title,
         style: snapshot.data?.docs[index].get('status') == name &&
             snapshot.data?.docs[index].get('priceStatus') == 'changed'
-            ? kRedTextStyle
+            ? kOrangeTextStyle
             : snapshot.data?.docs[index].get('status') == name &&
             snapshot.data?.docs[index].get('priceStatus') == 'set'
-            ? kGreenTextStyle
-            : kSmallTextStyle,),
+            ? kTextStyleWhite
+            : kSmallTextStyleWhite,),
     );
   }
 }

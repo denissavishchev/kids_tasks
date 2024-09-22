@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../constants.dart';
 
-class StarsWidget extends StatelessWidget {
-  StarsWidget({super.key,
+import '../../constants.dart';
+
+class KidStarsWidget extends StatelessWidget {
+  KidStarsWidget({super.key,
     required this.stars,
     required this.snapshot,
     required this.index
@@ -15,7 +16,7 @@ class StarsWidget extends StatelessWidget {
 
   final shadow = [
     const BoxShadow(
-        color: kBlue,
+        color: kWhite,
         blurRadius: 9,
         spreadRadius: 6,
         offset: Offset(0.5, 0.5)
@@ -29,34 +30,34 @@ class StarsWidget extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 10,
+              top: 10,
               left: 0,
               child: Icon(
                 stars >= 1
                     ? Icons.star
                     : Icons.star_border,
-                color: kGrey,
+                color: kOrange,
                 size: 40,
                 shadows: shadow,
               )),
           Align(
-           alignment: Alignment.topCenter,
+              alignment: Alignment.topCenter,
               child: Icon(
                 stars >= 2
                     ? Icons.star
                     : Icons.star_border,
-                color: kGrey,
+                color: kOrange,
                 size: 45,
                 shadows: shadow,
               )),
           Positioned(
-            top: 10,
+              top: 10,
               right: 0,
               child: Icon(
                 stars >= 3
                     ? Icons.star
                     : Icons.star_border,
-                color: kGrey,
+                color: kOrange,
                 size: 40,
                 shadows: shadow,
               )),
@@ -64,7 +65,7 @@ class StarsWidget extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Text('Оплачено',
                 style: snapshot.data?.docs[index].get('status') == 'paid'
-                ? kGreenTextStyle : kRedTextStyle,)),
+                    ? kTextStyleWhite : kRedTextStyle,)),
         ],
       ),
     );

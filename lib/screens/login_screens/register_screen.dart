@@ -75,11 +75,11 @@ class RegisterScreen extends StatelessWidget {
                                   autovalidateMode: AutovalidateMode.onUserInteraction,
                                   cursorColor: kDarkGrey,
                                   decoration: textFieldDecoration.copyWith(
-                                      label: Text('name',)),
+                                      label: const Text('Имя',)),
                                   maxLength: 64,
                                   validator: (value){
                                     if(value == null || value.isEmpty) {
-                                      return 'thisFieldCannotBeEmpty';
+                                      return 'Это поле не может быть пустым';
                                     }
                                     return null;
                                   },
@@ -89,11 +89,11 @@ class RegisterScreen extends StatelessWidget {
                                   autovalidateMode: AutovalidateMode.onUserInteraction,
                                   cursorColor: kDarkGrey,
                                   decoration: textFieldDecoration.copyWith(
-                                      label: Text('surname',)),
+                                      label: const Text('Фамилия',)),
                                   maxLength: 64,
                                   validator: (value){
                                     if(value == null || value.isEmpty) {
-                                      return 'thisFieldCannotBeEmpty';
+                                      return 'Это поле не может быть пустым';
                                     }
                                     return null;
                                   },
@@ -103,14 +103,14 @@ class RegisterScreen extends StatelessWidget {
                                   autovalidateMode: AutovalidateMode.onUserInteraction,
                                   cursorColor: kDarkGrey,
                                   decoration: textFieldDecoration.copyWith(
-                                      label: Text('email',)),
+                                      label: const Text('Электронная почта',)),
                                   maxLength: 64,
                                   validator: (value){
                                     if(value == null || value.isEmpty) {
-                                      return 'thisFieldCannotBeEmpty';
+                                      return 'Это поле не может быть пустым';
                                     }else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                         .hasMatch(value)){
-                                      return 'wrongEmail';
+                                      return 'Неправильный адрес электронной почты';
                                     }
                                     return null;
                                   },
@@ -122,7 +122,7 @@ class RegisterScreen extends StatelessWidget {
                                   cursorColor: kDarkGrey,
                                   obscureText: !data.isSignUpPasswordVisible,
                                   decoration: textFieldDecoration.copyWith(
-                                      label: Text('password',),
+                                      label: const Text('Пароль',),
                                       suffixIcon: IconButton(
                                           onPressed: () => data.switchSignUpPasswordVisibility(),
                                           icon: Icon(data.isSignUpPasswordVisible
@@ -131,9 +131,9 @@ class RegisterScreen extends StatelessWidget {
                                   maxLength: 64,
                                   validator: (value){
                                     if(value == null || value.isEmpty) {
-                                      return 'thisFieldCannotBeEmpty';
+                                      return 'Это поле не может быть пустым';
                                     }else if(data.passwordController.text != data.confirmPasswordController.text){
-                                      return 'passwordsMustBeTheSame';
+                                      return 'Пароли должны быть одинаковыми';
                                     }
                                     return null;
                                   },
@@ -145,7 +145,7 @@ class RegisterScreen extends StatelessWidget {
                                   cursorColor: kDarkGrey,
                                   obscureText: !data.isSignUpPasswordVisible,
                                   decoration: textFieldDecoration.copyWith(
-                                      label: Text('confirmPassword',),
+                                      label: const Text('Подтвердите пароль',),
                                       suffixIcon: IconButton(
                                           onPressed: () => data.switchSignUpPasswordVisibility(),
                                           icon: Icon(data.isSignUpPasswordVisible
@@ -154,9 +154,9 @@ class RegisterScreen extends StatelessWidget {
                                   maxLength: 64,
                                   validator: (value){
                                     if(value == null || value.isEmpty) {
-                                      return 'thisFieldCannotBeEmpty';
+                                      return 'Это поле не может быть пустым';
                                     }else if(data.passwordController.text != data.confirmPasswordController.text){
-                                      return 'passwordsMustBeTheSame';
+                                      return 'Пароли должны быть одинаковыми';
                                     }
                                     return null;
                                   },
@@ -168,7 +168,7 @@ class RegisterScreen extends StatelessWidget {
                                         data.signUp(context);
                                       }
                                     },
-                                    text: 'register'
+                                    text: 'Зарегистрироваться'
                                 ),
                                 SizedBox(
                                   height: MediaQuery.viewInsetsOf(context).bottom == 0

@@ -28,9 +28,11 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(
                             height: 250,
                             child: Image.asset('assets/images/login.png'),),
-                          Expanded(child: Text('hello',
-                            style: kTextStyle,
-                              textAlign: TextAlign.justify)),
+                          Expanded(
+                              child: Text(
+                                  'Приветствую в приложение для общения родителей и детей через задания и привычки',
+                                  style: kTextStyle,
+                                  textAlign: TextAlign.justify)),
                           const SizedBox(width: 12,)
                         ],
                       ),
@@ -44,14 +46,14 @@ class LoginScreen extends StatelessWidget {
                               autovalidateMode: AutovalidateMode.onUserInteraction,
                               cursorColor: kDarkGrey,
                               decoration: textFieldDecoration.copyWith(
-                                  label: Text('email',)),
+                                  label: const Text('Электронная почта',)),
                               maxLength: 64,
                               validator: (value){
                                 if(value == null || value.isEmpty) {
-                                  return 'thisFieldCannotBeEmpty';
+                                  return 'Это поле не может быть пустым';
                                 }else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                     .hasMatch(value)){
-                                  return 'wrongEmail';
+                                  return 'Неправильный адрес электронной почты';
                                 }
                                 return null;
                               },
@@ -63,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                               cursorColor: kDarkGrey,
                               obscureText: !data.isPasswordVisible,
                               decoration: textFieldDecoration.copyWith(
-                                  label: Text('password',),
+                                  label: const Text('Пароль',),
                                   suffixIcon: IconButton(
                                     onPressed: () => data.switchPasswordVisibility(),
                                     icon: Icon(data.isPasswordVisible
@@ -72,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                               maxLength: 64,
                               validator: (value){
                                 if(value == null || value.isEmpty) {
-                                  return 'thisFieldCannotBeEmpty';
+                                  return 'Это поле не может быть пустым';
                                 }
                                 return null;
                               },
@@ -80,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                             SizedBox(height: size.height * 0.15,),
                             ButtonWidget(
                                 onTap: () => data.logIn(),
-                                text: 'login'
+                                text: 'Войти'
                             ),
                             const SizedBox(height: 20,),
                             Row(
@@ -88,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                               children: [
                                 GestureDetector(
                                     onTap: () => data.resetPassword(context),
-                                    child: Text('forgotPassword')),
+                                    child: const Text('не помнишь пароль?')),
                                 GestureDetector(
                                     onTap: () {
                                       data.emailController.clear();
@@ -97,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                                           MaterialPageRoute(builder: (context) =>
                                           const RegisterScreen()));
                                     },
-                                    child: Text('createAccount')),
+                                    child: const Text('Зарегистрироваться')),
                               ],
                             ),
                             SizedBox(

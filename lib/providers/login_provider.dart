@@ -6,6 +6,7 @@ import '../constants.dart';
 import '../screens/login_screens/auth_screen.dart';
 import '../screens/login_screens/login_screen.dart';
 import '../widgets/button_widget.dart';
+import '../widgets/toasts.dart';
 
 class LoginProvider with ChangeNotifier {
 
@@ -20,6 +21,7 @@ class LoginProvider with ChangeNotifier {
   TextEditingController surnameController = TextEditingController();
 
   String role = '';
+  String name = '';
   bool isPasswordVisible = false;
   bool isSignUpPasswordVisible = false;
   bool isLoading = false;
@@ -34,7 +36,9 @@ class LoginProvider with ChangeNotifier {
       );
       
     }catch (e){
-      print('no user');
+      toast(
+          'Пользователь с этим адресом электронной почты не зарегистрирован или пароль неверен',
+          false);
     }
     await box.put('email', emailController.text.trim());
   }
@@ -44,6 +48,8 @@ class LoginProvider with ChangeNotifier {
     instance.collection('users').doc(box.get('email').toLowerCase()).get();
     box.put('role', doc.data()?['role'] ?? '');
     role = box.get('role');
+    box.put('name', doc.data()?['name'] ?? '');
+    name = box.get('name');
     notifyListeners();
   }
 
@@ -90,9 +96,9 @@ class LoginProvider with ChangeNotifier {
       successSighUp(context);
     }catch(e){
       if(e.toString().contains('Password should be at least 6 characters')){
-        print('weakPassword');
+        toast('Пароль должен содержать не менее 6 знаков, не менее одной буквы и одной цифры', false);
       }else if(e.toString().contains('The email address is already in use by another account')){
-        print('alreadyTaken');
+        toast('Это электронная почта уже используется', false);
       }
     }
     isLoading = false;
@@ -117,14 +123,16 @@ class LoginProvider with ChangeNotifier {
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
                   children: [
-                    Text('typeYourEmail', style: kTextStyle,),
+                    Text(
+                      'Введите здесь свой адрес электронной почты, и вам будет отправлена ссылка для смены пароля',
+                      style: kTextStyle,),
                     const SizedBox(height: 36,),
                     TextFormField(
                       controller: resetPasswordController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       cursorColor: kDarkGrey,
                       decoration: textFieldDecoration.copyWith(
-                          label: Text('email',)),
+                          label: const Text('Электронная почта',)),
                       maxLength: 64,
                       validator: (value){
                         if(value == null || value.isEmpty) {
@@ -143,10 +151,10 @@ class LoginProvider with ChangeNotifier {
                             await FirebaseAuth.instance.sendPasswordResetEmail(
                                 email: resetPasswordController.text.trim());
                           }on FirebaseAuthException {
-                            print('noEmail');
+                            toast('Этот адрес электронной почты не зарегистрирован', false);
                           }
                         },
-                        text: 'resetPassword'),
+                        text: 'Сброс пароля'),
                     const Spacer(),
                   ],
                 ),
@@ -180,7 +188,9 @@ class LoginProvider with ChangeNotifier {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Image.asset('assets/images/cat.png'),
                     ),
-                    Expanded(child: Text('canUseAccount', style: kTextStyle)),
+                    Expanded(
+                        child: Text(
+                            'Ваш аккаунт готов! Вы можете войти в систему, используя свой адрес электронной почты и пароль. Добро пожаловать снова в семью!', style: kTextStyle)),
                   ],
                 )
             ),

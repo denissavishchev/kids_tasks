@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:kids_tasks/providers/kid_provider.dart';
 import 'package:kids_tasks/providers/login_provider.dart';
 import 'package:kids_tasks/providers/parent_provider.dart';
 import 'package:kids_tasks/screens/login_screens/auth_screen.dart';
@@ -16,6 +17,7 @@ void main() async{
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<ParentProvider>(create: (_) => ParentProvider()),
+      ChangeNotifierProvider<KidProvider>(create: (_) => KidProvider()),
       ChangeNotifierProvider<LoginProvider>(create: (_) => LoginProvider()),
     ],
     builder: (context, child){
