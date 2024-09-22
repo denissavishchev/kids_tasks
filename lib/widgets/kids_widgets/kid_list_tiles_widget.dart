@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/parent_provider.dart';
+import '../../screens/kid_screens/kids_description_screen.dart';
 import 'kid_basic_container_widget.dart';
 
 class KidListTilesWidget extends StatelessWidget {
@@ -30,10 +31,10 @@ class KidListTilesWidget extends StatelessWidget {
                               == data.box.get('email').toLowerCase()){
                             return GestureDetector(
                               onTap: () {
-                                // data.priceController.text = snapshot.data?.docs[index].get('price');
-                                // Navigator.pushReplacement(context,
-                                //     MaterialPageRoute(builder: (context) =>
-                                //         KidsDescriptionScreen(index: index, snapshot: snapshot)));
+                                data.priceController.text = snapshot.data?.docs[index].get('price');
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) =>
+                                        KidsDescriptionScreen(index: index, snapshot: snapshot)));
                               },
                               child: KidBasicContainerWidget(
                                 snapshot: snapshot,

@@ -85,14 +85,14 @@ final kGreenTextStyle = TextStyle(
 final kRedTextStyle = TextStyle(
     color: kRed,
     fontWeight: FontWeight.bold,
-    fontSize: 24.sp,
+    fontSize: 22.sp,
     // fontFamily: 'Roboto'
 );
 
 final kOrangeTextStyle = TextStyle(
     color: kOrange,
     fontWeight: FontWeight.bold,
-    fontSize: 24.sp,
+    fontSize: 22.sp,
     // fontFamily: 'Roboto'
 );
 

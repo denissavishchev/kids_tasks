@@ -33,19 +33,10 @@ class MainKidScreen extends StatelessWidget {
                       height: size.height * 0.1,
                       child: Row(
                         children: [
-                          // IconButton(
-                          //     onPressed: () =>
-                          //         Navigator.pushReplacement(context,
-                          //             MaterialPageRoute(builder: (context) =>
-                          //             const KidsSettingsScreen())),
-                          //     icon: const Icon(
-                          //       Icons.settings,
-                          //       color: kOrange,
-                          //       size: 32,
-                          //     )),
                           TextButton(
-                              onPressed: () => loginData.logOut(context),
-                              child: Text('LogOut',style: kTextStyle,)),
+                            onLongPress: () => loginData.logOut(context),
+                            onPressed: () {},
+                            child: Text('LogOut',style: kTextStyle,)),
                           const Spacer(),
                           IconButton(
                               onPressed: () =>

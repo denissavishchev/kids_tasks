@@ -23,6 +23,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.0.0
   fluttertoast: ^8.2.8
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

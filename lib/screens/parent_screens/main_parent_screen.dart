@@ -4,6 +4,7 @@ import 'package:kids_tasks/widgets/parents_widgets/parent_list_tiles_widget.dart
 import 'package:provider/provider.dart';
 import '../../constants.dart';
 import '../../providers/parent_provider.dart';
+import '../history_screen.dart';
 import 'add_task_screen.dart';
 
 
@@ -29,27 +30,18 @@ class MainParentScreen extends StatelessWidget {
                           height: size.height * 0.1,
                           child: Row(
                             children: [
-                              // IconButton(
-                              //     onPressed: () =>
-                              //         Navigator.pushReplacement(context,
-                              //             MaterialPageRoute(builder: (context) =>
-                              //             const ParentSettingsScreen())),
-                              //     icon: const Icon(
-                              //       Icons.settings,
-                              //       color: kBlue,
-                              //       size: 32,
-                              //     )),
-                              // IconButton(
-                              //     onPressed: () => Navigator.pushReplacement(context,
-                              //         MaterialPageRoute(builder: (context) =>
-                              //         const HistoryScreen())),
-                              //     icon: const Icon(
-                              //       Icons.history,
-                              //       color: kBlue,
-                              //       size: 32,
-                              //     )),
+                              IconButton(
+                                  onPressed: () => Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) =>
+                                      const HistoryScreen())),
+                                  icon: const Icon(
+                                    Icons.history,
+                                    color: kBlue,
+                                    size: 32,
+                                  )),
                               TextButton(
-                                  onPressed: () => loginData.logOut(context),
+                                  onLongPress: () => loginData.logOut(context),
+                                  onPressed: () {},
                                   child: Text('LogOut',style: kTextStyle,)),
                               const Spacer(),
                               IconButton(
