@@ -121,15 +121,15 @@ class KidsDescriptionScreen extends StatelessWidget {
                           snapshot.data?.docs[index].get('imageUrl') == 'false'
                               ? const SizedBox.shrink()
                               : Expanded(
-                            child: Container(
-                              height: 300,
-                              clipBehavior: Clip.hardEdge,
-                              margin: const EdgeInsets.fromLTRB(3, 12, 12, 0),
-                              decoration: BoxDecoration(
-                                color: kOrange.withOpacity(0.7),
-                                borderRadius: const BorderRadius.all(Radius.circular(4)),
-                              ),
-                              child: Image.network(snapshot.data?.docs[index].get('imageUrl'), fit: BoxFit.cover),
+                                child: Container(
+                                  height: 300,
+                                  clipBehavior: Clip.hardEdge,
+                                  margin: const EdgeInsets.fromLTRB(3, 12, 12, 0),
+                                  decoration: BoxDecoration(
+                                    color: kOrange.withOpacity(0.7),
+                                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                                  ),
+                                  child: Image.network(snapshot.data?.docs[index].get('imageUrl'), fit: BoxFit.cover),
                             ),)
                         ],
                       ),
@@ -405,24 +405,46 @@ class KidsDescriptionScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: TextField(
-                  controller: data.priceController,
-                  cursorColor: kDarkGrey,
-                  style: const TextStyle(color: kWhite),
-                  decoration: textFieldDecoration.copyWith(
-                      label: const Text('Цена', style: TextStyle(color: kWhite),)),
+                child: Container(
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: kOrange.withOpacity(0.2),
+                            blurRadius: 10,
+                            offset: const Offset(0, -10)
+                        )
+                      ]
+                  ),
+                  child: TextField(
+                    controller: data.priceController,
+                    cursorColor: kDarkGrey,
+                    style: const TextStyle(color: kWhite),
+                    decoration: textFieldKidDecoration.copyWith(
+                        label: const Text('Цена', style: TextStyle(color: kWhite),)),
+                  ),
                 ),
               ),
-              IconButton(
-                  onPressed: () {
-                    data.changePriceStatus(snapshot, index, data.box.get('role'));
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) =>
-                        data.box.get('role') == 'parent'
-                            ? const MainParentScreen()
-                            : const MainKidScreen()));
-                  },
-                  icon: const Icon(Icons.change_circle_outlined, color: kWhite, size: 36,)
+              Container(
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: kOrange.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: const Offset(0, -10)
+                      )
+                    ]
+                ),
+                child: IconButton(
+                    onPressed: () {
+                      data.changePriceStatus(snapshot, index, data.box.get('role'));
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) =>
+                          data.box.get('role') == 'parent'
+                              ? const MainParentScreen()
+                              : const MainKidScreen()));
+                    },
+                    icon: const Icon(Icons.change_circle_outlined, color: kWhite, size: 36,)
+                ),
               )
             ],
           ),

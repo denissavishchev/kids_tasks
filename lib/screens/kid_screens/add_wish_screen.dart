@@ -50,7 +50,7 @@ class AddWishScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 18,),
                             Form(
-                              key: data.wishKey,
+                              key: KidProvider.wishKey,
                               child: Column(
                                 children: [
                                   Container(
@@ -66,9 +66,10 @@ class AddWishScreen extends StatelessWidget {
                                     child: TextFormField(
                                       controller: data.addWishNameController,
                                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                                      cursorColor: kDarkGrey,
+                                      cursorColor: kWhite,
+                                      style: const TextStyle(color: kWhite),
                                       decoration: textFieldKidDecoration.copyWith(
-                                          label: const Text('Желание',)),
+                                          label: const Text('Желание', style: TextStyle(color: kWhite))),
                                       maxLength: 64,
                                       validator: (value){
                                         if(value == null || value.isEmpty) {
@@ -82,6 +83,7 @@ class AddWishScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            const SizedBox(height: 12,),
                             GestureDetector(
                               onTap: () => data.pickAnImage(),
                               child: Container(
@@ -92,6 +94,8 @@ class AddWishScreen extends StatelessWidget {
                                   borderRadius: const BorderRadius.all(Radius.circular(4)),
                                 ),
                                 child: data.fileName == ''
+                                    ? const Icon(Icons.camera_alt)
+                                    : data.file == null
                                     ? const Icon(Icons.camera_alt)
                                     : Image.file(File(data.file!.path), fit: BoxFit.cover,),
                               ),
@@ -110,10 +114,10 @@ class AddWishScreen extends StatelessWidget {
                     ),
                     data.isLoading
                         ? Container(
-                      width: size.width,
-                      height: size.height,
-                      color: kGrey.withOpacity(0.5),
-                      child: const Center(child: CircularProgressIndicator(color: kBlue,),),
+                          width: size.width,
+                          height: size.height,
+                          color: kGrey.withOpacity(0.5),
+                          child: const Center(child: CircularProgressIndicator(color: kBlue,),),
                     ) : const SizedBox.shrink()
                   ],
                 );

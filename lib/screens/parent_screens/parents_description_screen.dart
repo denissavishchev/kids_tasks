@@ -336,7 +336,7 @@ class ParentsDescriptionScreen extends StatelessWidget {
             index: index,
             snapshot: snapshot,
             onTap: () => data.changeToChecked(snapshot, index, context),
-            text: 'rate',
+            text: 'Оценить',
           )
         ],
       )

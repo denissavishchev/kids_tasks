@@ -10,7 +10,7 @@ import '../widgets/toasts.dart';
 
 class LoginProvider with ChangeNotifier {
 
-  GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+  static const loginKey = Key('login');
   GlobalKey<FormState> registerKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();

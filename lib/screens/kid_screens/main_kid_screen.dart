@@ -46,7 +46,7 @@ class MainKidScreen extends StatelessWidget {
                               icon: const Icon(
                                 Icons.favorite,
                                 color: kOrange,
-                                size: 32,
+                                size: 42,
                               ))
                         ],
                       ),

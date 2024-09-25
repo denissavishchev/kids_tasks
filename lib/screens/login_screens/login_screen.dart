@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 50,),
                       Form(
-                        key: data.loginKey,
+                        key: LoginProvider.loginKey,
                         child: Column(
                           children: [
                             TextFormField(

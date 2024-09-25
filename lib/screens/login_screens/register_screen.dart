@@ -185,7 +185,7 @@ class RegisterScreen extends StatelessWidget {
                           width: size.width,
                           height: size.height,
                           color: kGrey.withOpacity(0.5),
-                    child: const Center(child: CircularProgressIndicator(color: kBlue,),),
+                          child: const Center(child: CircularProgressIndicator(color: kBlue,),),
                         ) : const SizedBox.shrink()
                 ],
               );

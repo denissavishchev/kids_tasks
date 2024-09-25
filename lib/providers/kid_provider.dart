@@ -4,8 +4,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kids_tasks/screens/kid_screens/add_wish_screen.dart';
 import '../constants.dart';
-import '../screens/kid_screens/main_kid_screen.dart';
 
 class KidProvider with ChangeNotifier {
 
@@ -15,7 +15,7 @@ class KidProvider with ChangeNotifier {
   late XFile? file;
   bool isLoading = false;
 
-  GlobalKey<FormState> wishKey = GlobalKey<FormState>();
+  static const wishKey = Key('wishes');
 
   TextEditingController addWishNameController = TextEditingController();
 
@@ -56,7 +56,7 @@ class KidProvider with ChangeNotifier {
         fileName = '';
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) =>
-            const MainKidScreen()));
+            const AddWishScreen()));
     isLoading = false;
     notifyListeners();
   }

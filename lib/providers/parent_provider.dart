@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kids_tasks/screens/kid_screens/add_wish_screen.dart';
 import '../constants.dart';
 import '../screens/history_screen.dart';
 import '../screens/kid_screens/main_kid_screen.dart';
@@ -94,7 +95,9 @@ class ParentProvider with ChangeNotifier {
       if(fileName == ''){
         return const Icon(Icons.camera_alt);
       }else{
-        return Image.file(File(file!.path), fit: BoxFit.cover,);
+        return file == null
+            ? const Icon(Icons.camera_alt)
+            : Image.file(File(file!.path), fit: BoxFit.cover,);
       }
     }
     return const Center(child: CircularProgressIndicator());
@@ -384,11 +387,62 @@ class ParentProvider with ChangeNotifier {
                   Center(child: Text('Вы уверены?', style: kTextStyle,)),
                   TextButton(
                       onPressed: () {
+                        if(snapshot.data?.docs[index].get('imageUrl') != 'false'){
+                          FirebaseStorage.instance.refFromURL(snapshot.data?.docs[index].get('imageUrl')).delete();
+                        }
                         FirebaseFirestore.instance.collection('history').doc(
                             snapshot.data?.docs[index].id).delete();
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) =>
                             const HistoryScreen()));
+                      },
+                      child: Text('Да', style: kTextStyle,)
+                  )
+                ],
+              )
+          );
+        });
+  }
+
+  Future<void>deleteWish(context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot, int index)async {
+    Size size = MediaQuery.sizeOf(context);
+    return showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (context) {
+          return Container(
+              height: size.height * 0.15,
+              width: size.width,
+              margin: const EdgeInsets.only(bottom: 300),
+              decoration: const BoxDecoration(
+                color: kGrey,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: const Icon(Icons.clear), color: kBlue,),
+                    ],
+                  ),
+                  Center(child: Text('Удалить это желание?', style: kTextStyle,)),
+                  TextButton(
+                      onPressed: () {
+                        if(snapshot.data?.docs[index].get('imageUrl') != 'false') {
+                          FirebaseStorage.instance.refFromURL(
+                              snapshot.data?.docs[index].get('imageUrl')).delete();
+                        }
+                        FirebaseFirestore.instance.collection('wishes').doc(
+                            snapshot.data?.docs[index].id).delete();
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) =>
+                            const AddWishScreen()));
                       },
                       child: Text('Да', style: kTextStyle,)
                   )

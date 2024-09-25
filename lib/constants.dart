@@ -78,7 +78,7 @@ final kSmallTextStyleWhite = TextStyle(
 final kGreenTextStyle = TextStyle(
     color: kGreen,
     fontWeight: FontWeight.bold,
-    fontSize: 24.sp,
+    fontSize: 22.sp,
     // fontFamily: 'Roboto'
 );
 
@@ -114,16 +114,17 @@ final textFieldDecoration = InputDecoration(
 
 final textFieldKidDecoration = InputDecoration(
     hintStyle: kTextStyleWhite,
+    errorStyle: const TextStyle(color: kWhite),
     enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: kOrange)
+        borderSide: BorderSide(color: kWhite)
     ),
     focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: kOrange)
+        borderSide: BorderSide(color: kWhite)
     ),
     focusedErrorBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: kRed)
+        borderSide: BorderSide(color: kWhite)
     ),
     errorBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: kRed)
+        borderSide: BorderSide(color: kWhite)
     ),
 );

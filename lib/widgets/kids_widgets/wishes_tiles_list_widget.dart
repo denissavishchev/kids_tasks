@@ -30,6 +30,7 @@ class WishesTilesListWidget extends StatelessWidget {
                           if(snapshot.data?.docs[index].get('kidEmail').toLowerCase()
                               == data.box.get('email').toLowerCase()){
                             return GestureDetector(
+                              onLongPress: () => data.deleteWish(context, snapshot, index),
                               onTap: () {
                                 snapshot.data?.docs[index].get('imageUrl') != 'false'
                                     ? kidData.showWishDescription(context, snapshot, index)
@@ -68,11 +69,11 @@ class WishesTilesListWidget extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(snapshot.data?.docs[index].get('wish'), style: kBigTextStyleWhite,),
+                                    Text(snapshot.data?.docs[index].get('wish'),
+                                      style: kBigTextStyleWhite,),
                                     snapshot.data?.docs[index].get('imageUrl') == 'false'
                                         ? const SizedBox.shrink()
                                         : Container(
-
                                           clipBehavior: Clip.hardEdge,
                                           margin: const EdgeInsets.all(3),
                                           decoration: BoxDecoration(

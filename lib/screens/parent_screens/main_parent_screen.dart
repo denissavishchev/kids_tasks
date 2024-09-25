@@ -54,7 +54,7 @@ class MainParentScreen extends StatelessWidget {
                                   icon: const Icon(
                                     Icons.add_circle_outline,
                                     color: kBlue,
-                                    size: 32,
+                                    size: 42,
                                   ))
                             ],
                           ),
