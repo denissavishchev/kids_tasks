@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kids_tasks/screens/kid_screens/add_wish_screen.dart';
 import '../constants.dart';
 import '../screens/history_screen.dart';
 import '../screens/kid_screens/main_kid_screen.dart';
@@ -404,7 +403,7 @@ class ParentProvider with ChangeNotifier {
         });
   }
 
-  Future<void>deleteWish(context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot, int index)async {
+  Future<void>stateQuestion(context, String action, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot, int index)async {
     Size size = MediaQuery.sizeOf(context);
     return showModalBottomSheet(
         context: context,
@@ -431,18 +430,16 @@ class ParentProvider with ChangeNotifier {
                         icon: const Icon(Icons.clear), color: kBlue,),
                     ],
                   ),
-                  Center(child: Text('Удалить это желание?', style: kTextStyle,)),
+                  Center(child: Text('Сменить статус?', style: kTextStyle,)),
                   TextButton(
                       onPressed: () {
-                        if(snapshot.data?.docs[index].get('imageUrl') != 'false') {
-                          FirebaseStorage.instance.refFromURL(
-                              snapshot.data?.docs[index].get('imageUrl')).delete();
-                        }
-                        FirebaseFirestore.instance.collection('wishes').doc(
-                            snapshot.data?.docs[index].id).delete();
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) =>
-                            const AddWishScreen()));
+                       action == 'changeToInProgress'
+                           ? changeToInProgress(snapshot, index, context)
+                           : action == 'changeToChecked'
+                           ? changeToChecked(snapshot, index, context)
+                           : action == 'changeToDone'
+                           ? changeToDone(snapshot, index, context)
+                           : changeToPaid(snapshot, index, context);
                       },
                       child: Text('Да', style: kTextStyle,)
                   )

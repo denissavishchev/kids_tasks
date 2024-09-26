@@ -304,7 +304,7 @@ class KidsDescriptionScreen extends StatelessWidget {
           ChangeButtonWidget(
             index: index,
             snapshot: snapshot,
-            onTap: () => data.changeToPaid(snapshot, index, context),
+            onTap: () => data.stateQuestion(context, 'changeToPaid', snapshot, index),
             text: 'Оплачено',
           ),
         ],
@@ -359,7 +359,7 @@ class KidsDescriptionScreen extends StatelessWidget {
             ChangeButtonWidget(
               index: index,
               snapshot: snapshot,
-              onTap: () => data.changeToChecked(snapshot, index, context),
+              onTap: () => data.stateQuestion(context, 'changeToChecked', snapshot, index),
               text: 'Оценить',
             )
         ],
@@ -381,7 +381,7 @@ class KidsDescriptionScreen extends StatelessWidget {
                 ChangeButtonWidget(
                   index: index,
                   snapshot: snapshot,
-                  onTap: () => data.changeToDone(snapshot, index, context),
+                  onTap: () => data.stateQuestion(context, 'changeToDone', snapshot, index),
                   text: 'Я сделал',
                 )
               ],
@@ -452,7 +452,7 @@ class KidsDescriptionScreen extends StatelessWidget {
           ChangeButtonWidget(
             index: index,
             snapshot: snapshot,
-            onTap: () => data.changeToInProgress(snapshot, index, context),
+            onTap: () => data.stateQuestion(context, 'changeToInProgress', snapshot, index),
             text: 'Принять цену и изменить статус',),
         ],
       )

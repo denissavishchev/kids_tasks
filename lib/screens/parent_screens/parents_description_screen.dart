@@ -335,7 +335,7 @@ class ParentsDescriptionScreen extends StatelessWidget {
           ChangeButtonWidget(
             index: index,
             snapshot: snapshot,
-            onTap: () => data.changeToChecked(snapshot, index, context),
+            onTap: () => data.stateQuestion(context, 'changeToChecked', snapshot, index),
             text: 'Оценить',
           )
         ],
@@ -405,7 +405,7 @@ class ParentsDescriptionScreen extends StatelessWidget {
                 ChangeButtonWidget(
                   index: index,
                   snapshot: snapshot,
-                  onTap: () => data.changeToInProgress(snapshot, index, context),
+                  onTap: () => data.stateQuestion(context, 'changeToInProgress', snapshot, index),
                   text: 'Принять цену и изменить статус',),
               ],
             )

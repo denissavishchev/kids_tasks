@@ -30,7 +30,7 @@ class WishesTilesListWidget extends StatelessWidget {
                           if(snapshot.data?.docs[index].get('kidEmail').toLowerCase()
                               == data.box.get('email').toLowerCase()){
                             return GestureDetector(
-                              onLongPress: () => data.deleteWish(context, snapshot, index),
+                              onLongPress: () => kidData.deleteWish(context, snapshot, index),
                               onTap: () {
                                 snapshot.data?.docs[index].get('imageUrl') != 'false'
                                     ? kidData.showWishDescription(context, snapshot, index)

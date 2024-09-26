@@ -85,4 +85,52 @@ class KidProvider with ChangeNotifier {
         });
   }
 
+  Future<void>deleteWish(context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot, int index)async {
+    Size size = MediaQuery.sizeOf(context);
+    return showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (context) {
+          return Container(
+              height: size.height * 0.15,
+              width: size.width,
+              margin: const EdgeInsets.only(bottom: 300),
+              decoration: const BoxDecoration(
+                color: kGrey,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: const Icon(Icons.clear), color: kBlue,),
+                    ],
+                  ),
+                  Center(child: Text('Удалить это желание?', style: kTextStyle,)),
+                  TextButton(
+                      onPressed: () {
+                        if(snapshot.data?.docs[index].get('imageUrl') != 'false') {
+                          FirebaseStorage.instance.refFromURL(
+                              snapshot.data?.docs[index].get('imageUrl')).delete();
+                        }
+                        FirebaseFirestore.instance.collection('wishes').doc(
+                            snapshot.data?.docs[index].id).delete();
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) =>
+                            const AddWishScreen()));
+                      },
+                      child: Text('Да', style: kTextStyle,)
+                  )
+                ],
+              )
+          );
+        });
+  }
+
 }
