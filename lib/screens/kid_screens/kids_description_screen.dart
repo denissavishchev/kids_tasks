@@ -81,6 +81,7 @@ class KidsDescriptionScreen extends StatelessWidget {
                                   Divider(color: kPurple.withOpacity(0.7), height: 0.1,),
                                   Container(
                                     width: size.width,
+                                    height: 42,
                                     padding: const EdgeInsets.only(left: 12),
                                     color: kOrange.withOpacity(0.7),
                                     child: Column(
@@ -90,8 +91,10 @@ class KidsDescriptionScreen extends StatelessWidget {
                                             Text('Цена: ',
                                               style: kTextStyle.copyWith(
                                                   color: kWhite.withOpacity(0.6)),),
-                                            Text(snapshot.data?.docs[index].get('price'),
-                                              style: kTextStyleWhite,),
+                                            Expanded(
+                                              child: Text(snapshot.data?.docs[index].get('price'),
+                                                style: kTextStyleWhite,),
+                                            ),
                                           ],
                                         ),
                                       ],

@@ -27,8 +27,8 @@ class ParentListTilesWidget extends StatelessWidget {
                     return ListView.builder(
                         itemCount: snapshot.data?.docs.length,
                         itemBuilder: (context, index){
-                          if(snapshot.data?.docs[index].get('parentEmail').toLowerCase()
-                              == data.box.get('email').toLowerCase()){
+                          // if(snapshot.data?.docs[index].get('parentEmail').toLowerCase()
+                          //     == data.box.get('email').toLowerCase()){
                             return GestureDetector(
                               onTap: () {
                                 data.priceController.text = snapshot.data?.docs[index].get('price');
@@ -42,8 +42,8 @@ class ParentListTilesWidget extends StatelessWidget {
                                 nameOf: 'kidName',
                               ),
                             );
-                          }
-                          return const SizedBox.shrink();
+                          // }
+                          // return const SizedBox.shrink();
                         });
                   }else{
                     return const Center(child: CircularProgressIndicator());

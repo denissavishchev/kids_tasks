@@ -294,49 +294,67 @@ class ParentsDescriptionScreen extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: data.box.get('role') == 'parent'
           ? Column(
-        children: [
-          Text('Проверьте выполненную работу и поставьте оценку...', style: kTextStyle,),
-          const SizedBox(height: 8,),
-          Center(
-            child: RatingBar(
-              initialRating: 0,
-              allowHalfRating: false,
-              itemCount: 3,
-              itemSize: 60,
-              ratingWidget: RatingWidget(
-                full: const Icon(Icons.star,
-                    color: kGrey,
-                    shadows: [
-                      BoxShadow(
-                          color: kBlue,
-                          blurRadius: 9,
-                          spreadRadius: 6,
-                          offset: Offset(0.5, 0.5)
-                      )
-                    ]),
-                empty: const Icon(Icons.star_border,
-                    color: kGrey,
-                    shadows: [
-                      BoxShadow(
-                          color: kBlue,
-                          blurRadius: 9,
-                          spreadRadius: 6,
-                          offset: Offset(0.5, 0.5)
-                      )
-                    ]), half: const SizedBox.shrink(),
+          children: [
+            Text('Проверьте выполненную работу и поставьте оценку...', style: kTextStyle,),
+            const SizedBox(height: 8,),
+            Center(
+              child: AbsorbPointer(
+                absorbing: snapshot.data?.docs[index].get('parentEmail').toLowerCase()
+                    != data.box.get('email').toLowerCase(),
+                child: RatingBar(
+                initialRating: 0,
+                allowHalfRating: false,
+                itemCount: 3,
+                itemSize: 60,
+                ratingWidget: RatingWidget(
+                  full: const Icon(Icons.star,
+                      color: kGrey,
+                      shadows: [
+                        BoxShadow(
+                            color: kBlue,
+                            blurRadius: 9,
+                            spreadRadius: 6,
+                            offset: Offset(0.5, 0.5)
+                        )
+                      ]),
+                  empty: Icon(Icons.star_border,
+                      color: snapshot.data?.docs[index].get('parentEmail').toLowerCase()
+                          == data.box.get('email').toLowerCase()
+                      ? kGrey
+                      : kGrey.withOpacity(0.2),
+                      shadows: [
+                        BoxShadow(
+                            color: snapshot.data?.docs[index].get('parentEmail').toLowerCase()
+                      == data.box.get('email').toLowerCase()
+                                ? kBlue
+                                : kBlue.withOpacity(0.2),
+                            blurRadius: 9,
+                            spreadRadius: 6,
+                            offset: const Offset(0.5, 0.5)
+                        )
+                      ]), half: const SizedBox.shrink(),
+                ),
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                onRatingUpdate: (rating) => data.updateRating(rating),
+                            ),
               ),
-              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-              onRatingUpdate: (rating) => data.updateRating(rating),
-            ),
           ),
           const SizedBox(height: 8,),
           Text('...и не забывайте об оплате', style: kTextStyle,),
           const SizedBox(height: 8,),
-          ChangeButtonWidget(
-            index: index,
-            snapshot: snapshot,
-            onTap: () => data.stateQuestion(context, 'changeToChecked', snapshot, index),
-            text: 'Оценить',
+          AbsorbPointer(
+            absorbing: snapshot.data?.docs[index].get('parentEmail').toLowerCase()
+                != data.box.get('email').toLowerCase(),
+            child: Opacity(
+              opacity: snapshot.data?.docs[index].get('parentEmail').toLowerCase()
+                  != data.box.get('email').toLowerCase() ? 0.2 : 1,
+              child: ChangeButtonWidget(
+                index: index,
+                snapshot: snapshot,
+                onTap: () => data.stateQuestion(context, 'changeToChecked', snapshot, index),
+                text: 'Оценить',
+              ),
+            ),
           )
         ],
       )

@@ -97,14 +97,19 @@ class KidBasicContainerWidget extends StatelessWidget {
                             style: kBigTextStyleWhite,),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 18),
+                          padding: const EdgeInsets.symmetric(horizontal: 18),
                           child: Row(
                             children: [
                               Text('Цена: ',
                                 style: kTextStyle.copyWith(
                                     color: kWhite.withOpacity(0.6)),),
-                              Text(snapshot.data?.docs[index].get('price'),
-                                style: kTextStyleWhite,),
+                              Expanded(
+                                child: Text(snapshot.data?.docs[index].get('price'),
+                                  style: kTextStyleWhite,
+                                  overflow: TextOverflow.fade,
+                                  softWrap: false,
+                                  maxLines: 1,),
+                              ),
                             ],
                           ),
                         )

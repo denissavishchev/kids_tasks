@@ -57,12 +57,14 @@ class BasicContainerWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(snapshot.data?.docs[index].get(nameOf),
                                 style: kBigTextStyle,),
+                              Text(snapshot.data?.docs[index].get('parentName'),
+                                style: kBigTextStyle.copyWith(color: kBlue.withOpacity(0.5)),),
                             ],
                           ),
                         ),
@@ -81,14 +83,19 @@ class BasicContainerWidget extends StatelessWidget {
                             style: kBigTextStyle,),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Row(
                             children: [
                               Text('Цена: ',
                                 style: kTextStyle.copyWith(
                                     color: kBlue.withOpacity(0.6)),),
-                              Text(snapshot.data?.docs[index].get('price'),
-                                style: kTextStyle,),
+                              Expanded(
+                                child: Text(snapshot.data?.docs[index].get('price'),
+                                  style: kTextStyle,
+                                  overflow: TextOverflow.fade,
+                                  softWrap: false,
+                                  maxLines: 1,),
+                              ),
                             ],
                           ),
                         )
